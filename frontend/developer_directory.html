@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Developers | SimplyBridge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "secondary": "#00687b",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#8c4a00",
+                        "on-surface": "#051a3e",
+                        "inverse-primary": "#b2c5ff",
+                        "on-secondary-fixed": "#001f27",
+                        "surface-dim": "#ccdaff",
+                        "on-background": "#051a3e",
+                        "surface-bright": "#faf9ff",
+                        "outline": "#737685",
+                        "tertiary": "#6a3600",
+                        "primary-container": "#0052cc",
+                        "inverse-surface": "#1d3054",
+                        "primary-fixed": "#dae2ff",
+                        "secondary-fixed-dim": "#48d7f9",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-surface-variant": "#434654",
+                        "surface-container-highest": "#d8e2ff",
+                        "secondary-container": "#50dcff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0c56d0",
+                        "on-secondary-fixed-variant": "#004e5d",
+                        "tertiary-fixed": "#ffdcc3",
+                        "outline-variant": "#c3c6d6",
+                        "inverse-on-surface": "#edf0ff",
+                        "surface-container": "#e9edff",
+                        "on-primary-container": "#c4d2ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#afecff",
+                        "on-tertiary-fixed": "#2f1500",
+                        "background": "#faf9ff",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "primary": "#003d9b",
+                        "on-tertiary-container": "#ffc9a0",
+                        "surface-container-low": "#f1f3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e1e8ff",
+                        "surface": "#faf9ff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001848",
+                        "tertiary-fixed-dim": "#ffb77e",
+                        "surface-variant": "#d8e2ff",
+                        "on-secondary-container": "#005f71"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #faf9ff; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-50 font-['Manrope']">SimplyBridge</div>
+<div class="hidden md:flex items-center gap-8 font-['Inter'] text-sm font-medium">
+<a class="text-blue-700 dark:text-blue-400 font-semibold border-b-2 border-blue-700 dark:border-blue-400 pb-1" href="#">Browse Developers</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300 ease-in-out" href="#">How it Works</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300 ease-in-out" href="login.html">Login</a>
+</div>
+<button onclick="window.location.href='register.html'" class="bg-primary hover:opacity-80 transition-opacity text-on-primary px-6 py-2.5 rounded-lg text-sm font-bold font-['Inter']">
+                Join Now
+            </button>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 pt-12 pb-24">
+<!-- Hero Search Section -->
+<header class="mb-16">
+<h1 class="text-5xl font-extrabold tracking-tight mb-4 text-on-surface">Find the perfect architect for your vision.</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl font-body mb-10">Connect with vetted developers across the globe. Precision engineering meets seamless integration.</p>
+<div class="flex flex-col md:flex-row gap-4 p-2 bg-surface-container-low rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex-grow flex items-center px-4 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="search">search</span>
+<input class="w-full py-4 border-none bg-transparent focus:ring-0 text-on-surface placeholder:text-outline/60 font-body" placeholder="Search skills (e.g., Flutter, Python, AWS)" type="text"/>
+</div>
+<div class="flex-shrink-0 flex items-center px-4 bg-surface-container-lowest rounded-lg md:w-64">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="location_on">location_on</span>
+<input class="w-full py-4 border-none bg-transparent focus:ring-0 text-on-surface placeholder:text-outline/60 font-body" placeholder="Location (e.g., Kampala)" type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                    Search Talents
+                </button>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Filters (Asymmetric Layout) -->
+<aside class="w-full lg:w-64 space-y-10">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-outline mb-6">Expertise Level</h3>
+<div class="space-y-4">
+<label class="flex items-center group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-5 w-5 bg-surface-container-high" type="checkbox"/>
+<span class="ml-3 text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Senior Architect (8+ yrs)</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-5 w-5 bg-surface-container-high" type="checkbox"/>
+<span class="ml-3 text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Full Stack Engineer</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-5 w-5 bg-surface-container-high" type="checkbox"/>
+<span class="ml-3 text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Mobile Specialist</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-outline mb-6">Top Regions</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-secondary-fixed text-on-secondary-fixed rounded-full text-xs font-semibold">Kampala</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors cursor-pointer">Nairobi</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors cursor-pointer">Lagos</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors cursor-pointer">Remote</span>
+</div>
+</div>
+<div class="p-6 bg-primary-fixed rounded-xl">
+<h4 class="font-headline font-bold text-on-primary-fixed mb-2">Need a team?</h4>
+<p class="text-xs text-on-primary-fixed-variant leading-relaxed mb-4">We help enterprises build dedicated offshore dev squads in under 2 weeks.</p>
+<a class="text-xs font-bold text-primary flex items-center gap-1 group" href="#">
+                        Talk to an expert 
+                        <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area: Bento-inspired Grid -->
+<section class="flex-grow">
+<div id="developers-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
+    <!-- Developers will be dynamically populated here -->
+</div>
+<!-- Pagination (Editorial Style) -->
+<div class="mt-16 flex items-center justify-between border-t border-outline-variant/10 pt-8">
+<p class="text-sm text-on-surface-variant">Showing 1 to 4 of 248 developers</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors text-sm font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors text-sm font-medium">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 full-width border-t border-slate-200/50 dark:border-slate-800/50">
+<div class="w-full py-12 px-6 flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="text-lg font-bold text-blue-900 dark:text-blue-50 font-['Manrope'] mb-2">SimplyBridge</div>
+<p class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400">© 2024 SimplyBridge. All rights reserved.</p>
+</div>
+<div class="flex gap-8 items-center">
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Privacy</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Terms</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">Twitter</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+<script>
+    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? `${window.location.protocol}//${window.location.hostname}:8000`
+        : window.location.origin;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/developers`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch developers");
+            }
+            const developers = await response.json();
+            const grid = document.getElementById("developers-grid");
+            grid.innerHTML = ""; // Clear existing
+
+            if (developers.length === 0) {
+                grid.innerHTML = "<p class='text-on-surface-variant'>No developers found.</p>";
+                return;
+            }
+
+            developers.forEach(dev => {
+                const skillsArray = dev.skills ? dev.skills.split(',').map(s => s.trim()) : [];
+                const skillsHtml = skillsArray.map(skill => 
+                    `<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-md text-[11px] font-semibold">${skill}</span>`
+                ).join("");
+
+                const cardHtml = `
+                <div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_32px_64px_-12px_rgba(5,26,62,0.06)] hover:translate-y-[-4px] transition-all duration-300 flex flex-col h-full border border-outline-variant/10">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-xl uppercase">
+                                ${dev.full_name.charAt(0)}
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-on-surface">${dev.full_name}</h3>
+                                <div class="flex items-center text-secondary text-xs font-medium mt-1">
+                                    <span class="material-symbols-outlined text-[14px] mr-1" data-icon="location_on">location_on</span>
+                                    ${dev.location || 'Remote'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed mb-6 flex-grow">
+                        ${dev.bio || 'No bio provided.'}
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        ${skillsHtml}
+                    </div>
+                    <button onclick="window.location.href='developer_profile.html?id=${dev.user_id}'" class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold text-sm hover:shadow-lg transition-all">View Profile</button>
+                </div>`;
+                
+                grid.insertAdjacentHTML("beforeend", cardHtml);
+            });
+        } catch (error) {
+            console.error("Error fetching developers:", error);
+            const grid = document.getElementById("developers-grid");
+            grid.innerHTML = "<p class='text-error'>Error loading developers.</p>";
+        }
+    });
+</script>
+</body></html>

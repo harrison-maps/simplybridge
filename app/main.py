@@ -1,0 +1,58 @@
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+from app.database import engine, Base
+from app.models import user
+from app.models import developer_profile
+from app.models import project
+from app.models import message
+from app.routes.auth import router as auth_router
+from app.routes.profile import router as profile_router
+from app.routes.projects import router as projects_router
+from app.routes.messages import router as messages_router
+from app.core.config import settings
+import os
+
+app = FastAPI()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), "frontend")
+
+if os.path.exists(FRONTEND_DIR):
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
+allowed_origins = ["http://localhost:3000", "http://localhost:8000"]
+if settings.FRONTEND_URL:
+    allowed_origins.append(settings.FRONTEND_URL)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(profile_router, tags=["Profiles"])
+app.include_router(projects_router, prefix="/api", tags=["Projects"])
+app.include_router(messages_router, tags=["Messages"])
+Base.metadata.create_all(bind=engine)
+
+
+@app.get("/", tags=["Root"])
+def root():
+    return {"message": "SimplyBridge API is running", "docs": "/docs"}
+
+
+@app.get("/{page}", tags=["Frontend"], response_class=HTMLResponse)
+async def serve_frontend_page(page: str):
+    """Serve frontend HTML pages"""
+    if os.path.exists(FRONTEND_DIR):
+        page_path = os.path.join(FRONTEND_DIR, f"{page}.html")
+        if os.path.exists(page_path):
+            return FileResponse(page_path)
+    
+    if os.path.exists(FRONTEND_DIR):
+        return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
+    return {"error": "Page not found"}
