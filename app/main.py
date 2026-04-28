@@ -62,13 +62,44 @@ def root():
     return {"message": "SimplyBridge API is running", "docs": "/docs"}
 
 
+@app.get("/debug", tags=["Debug"])
+def debug():
+    return {"frontend_dir": FRONTEND_DIR, "exists": os.path.exists(FRONTEND_DIR) if FRONTEND_DIR else False}
+
+
+@app.get("/landing_page", tags=["Frontend"])
+async def serve_landing_page():
+    """Serve landing page"""
+    return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
+
+@app.get("/login", tags=["Frontend"])
+async def serve_login():
+    return FileResponse(os.path.join(FRONTEND_DIR, "login.html"))
+
+@app.get("/register", tags=["Frontend"])
+async def serve_register():
+    return FileResponse(os.path.join(FRONTEND_DIR, "register.html"))
+
+@app.get("/developer_dashboard", tags=["Frontend"])
+async def serve_developer_dashboard():
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_dashboard.html"))
+
+@app.get("/developer_profile", tags=["Frontend"])
+async def serve_developer_profile():
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_profile.html"))
+
+@app.get("/developer_directory", tags=["Frontend"])
+async def serve_developer_directory():
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_directory.html"))
+
+
 @app.get("/{page}", tags=["Frontend"])
-async def serve_frontend_page(page: str):
-    """Serve frontend HTML pages"""
-    if page in ["docs", "openapi.json", "redoc"]:
+async def serve_frontend_page_fallback(page: str):
+    """Serve frontend HTML pages - fallback"""
+    if page in ["docs", "openapi.json", "redoc", "debug"]:
         return {"error": "Not found"}
     if not FRONTEND_DIR or not os.path.exists(FRONTEND_DIR):
-        return HTMLResponse(content="<h1>SimplyBridge</h1><p>Frontend not found</p>")
+        return HTMLResponse(content=f"<h1>SimplyBridge</h1><p>Frontend not found</p>")
     
     for name in [page, f"{page}.html"]:
         page_path = os.path.join(FRONTEND_DIR, name)
