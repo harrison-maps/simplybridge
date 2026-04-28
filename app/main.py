@@ -63,7 +63,6 @@ def root():
 
 
 @app.get("/{page}", tags=["Frontend"])
-@app.get("/{page}.html", tags=["Frontend"])
 async def serve_frontend_page(page: str):
     """Serve frontend HTML pages"""
     if page in ["docs", "openapi.json", "redoc"]:
@@ -71,9 +70,9 @@ async def serve_frontend_page(page: str):
     if not FRONTEND_DIR or not os.path.exists(FRONTEND_DIR):
         return HTMLResponse(content="<h1>SimplyBridge</h1><p>Frontend not found</p>")
     
-    page_file = f"{page}.html" if not page.endswith(".html") else page
-    page_path = os.path.join(FRONTEND_DIR, page_file)
-    if os.path.exists(page_path):
-        return FileResponse(page_path)
+    for name in [page, f"{page}.html"]:
+        page_path = os.path.join(FRONTEND_DIR, name)
+        if os.path.exists(page_path) and os.path.isfile(page_path):
+            return FileResponse(page_path)
     
     return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
