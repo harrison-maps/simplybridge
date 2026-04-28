@@ -57,19 +57,23 @@ Base.metadata.create_all(bind=engine)
 
 @app.get("/", tags=["Root"])
 def root():
+    if FRONTEND_DIR and os.path.exists(os.path.join(FRONTEND_DIR, "landing_page.html")):
+        return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
     return {"message": "SimplyBridge API is running", "docs": "/docs"}
 
 
-@app.get("/{page}", tags=["Frontend"], response_class=HTMLResponse)
+@app.get("/{page}", tags=["Frontend"])
+@app.get("/{page}.html", tags=["Frontend"])
 async def serve_frontend_page(page: str):
     """Serve frontend HTML pages"""
     if page in ["docs", "openapi.json", "redoc"]:
         return {"error": "Not found"}
-    if os.path.exists(FRONTEND_DIR):
-        page_path = os.path.join(FRONTEND_DIR, f"{page}.html")
-        if os.path.exists(page_path):
-            return FileResponse(page_path)
+    if not FRONTEND_DIR or not os.path.exists(FRONTEND_DIR):
+        return HTMLResponse(content="<h1>SimplyBridge</h1><p>Frontend not found</p>")
     
-    if os.path.exists(FRONTEND_DIR):
-        return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
-    return HTMLResponse(content="<h1>SimplyBridge</h1><p>Frontend not found</p>")
+    page_file = f"{page}.html" if not page.endswith(".html") else page
+    page_path = os.path.join(FRONTEND_DIR, page_file)
+    if os.path.exists(page_path):
+        return FileResponse(page_path)
+    
+    return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
