@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse, FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from app.database import engine, Base
 from app.models import user
@@ -58,7 +58,7 @@ Base.metadata.create_all(bind=engine)
 @app.get("/", tags=["Root"])
 def root():
     if FRONTEND_DIR and os.path.exists(os.path.join(FRONTEND_DIR, "landing_page.html")):
-        return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
+        return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"), media_type="text/html")
     return {"message": "SimplyBridge API is running", "docs": "/docs"}
 
 
@@ -70,27 +70,27 @@ def debug():
 @app.get("/landing_page", tags=["Frontend"])
 async def serve_landing_page():
     """Serve landing page"""
-    return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"), media_type="text/html")
 
 @app.get("/login", tags=["Frontend"])
 async def serve_login():
-    return FileResponse(os.path.join(FRONTEND_DIR, "login.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "login.html"), media_type="text/html")
 
 @app.get("/register", tags=["Frontend"])
 async def serve_register():
-    return FileResponse(os.path.join(FRONTEND_DIR, "register.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "register.html"), media_type="text/html")
 
 @app.get("/developer_dashboard", tags=["Frontend"])
 async def serve_developer_dashboard():
-    return FileResponse(os.path.join(FRONTEND_DIR, "developer_dashboard.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_dashboard.html"), media_type="text/html")
 
 @app.get("/developer_profile", tags=["Frontend"])
 async def serve_developer_profile():
-    return FileResponse(os.path.join(FRONTEND_DIR, "developer_profile.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_profile.html"), media_type="text/html")
 
 @app.get("/developer_directory", tags=["Frontend"])
 async def serve_developer_directory():
-    return FileResponse(os.path.join(FRONTEND_DIR, "developer_directory.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "developer_directory.html"), media_type="text/html")
 
 
 @app.get("/{page}", tags=["Frontend"])
