@@ -17,11 +17,24 @@ import os
 app = FastAPI()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), "frontend")
-if not os.path.exists(FRONTEND_DIR):
+possible_paths = [
+    os.path.join(BASE_DIR, "frontend"),
+    os.path.join(os.path.dirname(BASE_DIR), "frontend"),
+    os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "frontend"),
+]
+FRONTEND_DIR = None
+for path in possible_paths:
+    if os.path.exists(path):
+        FRONTEND_DIR = path
+        break
+if FRONTEND_DIR is None:
     FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
+print(f"Frontend directory: {FRONTEND_DIR}")
+print(f"Frontend exists: {os.path.exists(FRONTEND_DIR)}")
+
 if os.path.exists(FRONTEND_DIR):
+    print(f"Mounting static files from {FRONTEND_DIR}")
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 allowed_origins = ["http://localhost:3000", "http://localhost:8000"]
