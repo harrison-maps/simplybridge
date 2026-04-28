@@ -18,6 +18,8 @@ app = FastAPI()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(os.path.dirname(BASE_DIR), "frontend")
+if not os.path.exists(FRONTEND_DIR):
+    FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
 if os.path.exists(FRONTEND_DIR):
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
@@ -48,6 +50,8 @@ def root():
 @app.get("/{page}", tags=["Frontend"], response_class=HTMLResponse)
 async def serve_frontend_page(page: str):
     """Serve frontend HTML pages"""
+    if page in ["docs", "openapi.json", "redoc"]:
+        return {"error": "Not found"}
     if os.path.exists(FRONTEND_DIR):
         page_path = os.path.join(FRONTEND_DIR, f"{page}.html")
         if os.path.exists(page_path):
@@ -55,4 +59,4 @@ async def serve_frontend_page(page: str):
     
     if os.path.exists(FRONTEND_DIR):
         return FileResponse(os.path.join(FRONTEND_DIR, "landing_page.html"))
-    return {"error": "Page not found"}
+    return HTMLResponse(content="<h1>SimplyBridge</h1><p>Frontend not found</p>")
